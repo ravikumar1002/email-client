@@ -2,10 +2,11 @@
   display: flex;
   border: 1px solid var(--border-color);
   border-radius: 10px;
+  padding: 0.5rem 1rem ;
 }
 
 .email-card__wrapper > div {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
 }
 
 .email-card__content {
