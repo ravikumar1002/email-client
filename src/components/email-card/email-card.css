@@ -1,0 +1,16 @@
+.email-card__wrapper {
+  display: flex;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+
+.email-card__wrapper > div {
+  padding: 0.5rem 1rem;
+}
+
+
+.email-card__content{
+   display: flex;
+   flex-direction: column;
+   gap: 0.5rem;
+}

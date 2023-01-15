@@ -2,7 +2,10 @@ import { useEffect } from "react";
 import "./App.css";
 import { Avatar } from "./components/avatar/Avatar";
 import { PillButton } from "./components/button/PillButton";
-import { useAppDispatch } from "./hooks/reduxHooks";
+import { EmailCard } from "./components/email-card/EmailCard";
+import { Filter } from "./components/filter/Filter";
+import { EmailPage } from "./features/emailPage";
+import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 import { getAllEmailThunk, getEmailThunk } from "./thunk/emailsThunk";
 
 function App() {
@@ -15,14 +18,8 @@ function App() {
 
   return (
     <div className="App">
-      <Avatar avatarText="avatar" />
-      <PillButton
-        handleClick={() => {
-          console.log("click");
-        }}
-      >
-        Text
-      </PillButton>
+      <Filter />
+      <EmailPage />
     </div>
   );
 }
