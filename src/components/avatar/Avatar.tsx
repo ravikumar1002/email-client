@@ -1,4 +1,4 @@
-import "./avatar.css"
+import "./avatar.css";
 
 interface IAvatarProps {
   avatarText: string;

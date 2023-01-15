@@ -8,9 +8,8 @@
   padding: 0.5rem 1rem;
 }
 
-
-.email-card__content{
-   display: flex;
-   flex-direction: column;
-   gap: 0.5rem;
+.email-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
