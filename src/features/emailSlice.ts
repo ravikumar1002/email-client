@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { RootState } from "../store/store"
-import { IEmailsDto } from "../dto/emailsDTO"
+import { IEmailDto } from "../dto/emailsDTO"
 import { getAllEmailThunk, getEmailThunk } from "../thunk/emailsThunk";
+import type { PayloadAction } from '@reduxjs/toolkit'
 
 interface IInitialState {
-    emails: [];
+    emails: IEmailDto[];
+    filterEmails: IEmailDto[];
     totalEmails: number;
+    emailSort: {
+        read: string[];
+        unread: string[];
+        favorite: string[];
+    };
     emailData: {};
     emailsStatus: string;
     emailStatus: string;
@@ -13,6 +19,12 @@ interface IInitialState {
 
 const initialState: IInitialState = {
     emails: [],
+    filterEmails: [],
+    emailSort: {
+        read: [],
+        unread: [],
+        favorite: [],
+    },
     emailData: {},
     totalEmails: 0,
     emailsStatus: "idle",
@@ -23,7 +35,9 @@ export const emailSlice = createSlice({
     name: 'email',
     initialState,
     reducers: {
-
+        addEmailInRead: (state, action: PayloadAction<string>) => {
+            state.emailSort.read = [...state.emailSort.read, action.payload]
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -33,6 +47,7 @@ export const emailSlice = createSlice({
             .addCase(getAllEmailThunk.fulfilled, (state, action) => {
                 state.emailsStatus = "fulfilled";
                 state.emails = action.payload?.list;
+                state.filterEmails = action.payload?.list;
                 state.totalEmails = action.payload?.total;
             })
             .addCase(getAllEmailThunk.rejected, (state, action) => {
@@ -51,6 +66,7 @@ export const emailSlice = createSlice({
     }
 })
 
+export const { addEmailInRead } = emailSlice.actions
 
 export const emailReducer = emailSlice.reducer
 

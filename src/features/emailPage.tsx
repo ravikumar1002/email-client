@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { EmailCard } from "../components/email-card/EmailCard";
 import { EmailDetailsOpen } from "../components/emailDetailsOpen/EmailDetailsOpen";
-import { useAppSelector } from "../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import "./email-page.css";
+import { addEmailInRead } from "./emailSlice";
 
 export const EmailPage = () => {
-  const { emails, emailData } = useAppSelector((state) => state.emailsList);
+  const { emails, filterEmails, emailData, emailSort } = useAppSelector(
+    (state) => state.emailsList
+  );
   const [openEmailDetails, setOpenEmailDetails] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
   const openEmailCardStyle = {
     width: "40%",
@@ -29,12 +33,16 @@ export const EmailPage = () => {
         className="emails-container"
         style={openEmailDetails ? openEmailCardStyle : closeEmailCardStyle}
       >
-        {emails.length > 0 &&
-          emails.map((email) => {
+        {filterEmails.length > 0 &&
+          filterEmails.map((email) => {
             return (
               <div
                 key={email?.id}
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (!emailSort.read.includes(email?.id)) {
+                    dispatch(addEmailInRead(email?.id));
+                  }
                   setOpenEmailDetails(true);
                 }}
               >
