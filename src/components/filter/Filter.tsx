@@ -22,7 +22,6 @@ export const Filter = () => {
       >
         <PillButton
           handleClick={() => {
-            console.log("click");
             dispatch(filterUnreadEmail());
           }}
         >
@@ -30,7 +29,6 @@ export const Filter = () => {
         </PillButton>
         <PillButton
           handleClick={() => {
-            console.log("click");
             dispatch(filterReadEmail());
           }}
         >
@@ -38,7 +36,6 @@ export const Filter = () => {
         </PillButton>
         <PillButton
           handleClick={() => {
-            console.log("click");
             dispatch(filterFavorite());
           }}
         >

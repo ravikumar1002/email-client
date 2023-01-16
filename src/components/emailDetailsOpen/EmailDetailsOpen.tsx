@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { IEmailDto } from "../../dto/emailsDTO";
-import { addEmailInFavorite } from "../../features/emailSlice";
+import { addEmailInFavorite, filterFavorite } from "../../features/emailSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { useDateFormat } from "../../hooks/useDateFormat";
 import { Avatar } from "../avatar/Avatar";
 import { PillButton } from "../button/PillButton";
 import "./email-details_open.css";
@@ -21,6 +23,8 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
 
   const { id, body } = emailData;
 
+  useEffect(() => {}, []);
+
   return (
     <div className="email-details__open">
       <div>
@@ -40,26 +44,28 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
           <h2>{subject}</h2>
           <PillButton
             handleClick={() => {
-              console.log("mark as fav");
               if (!emailSort.favorite.includes(id)) {
                 dispatch(addEmailInFavorite(id));
+                // dispatch(filterFavorite());
               }
             }}
           >
             Mark as favorite
           </PillButton>
         </div>
-        <div style={{
-          paddingRight: "1rem"
-        }}>
+        <div
+          style={{
+            paddingRight: "1rem",
+          }}
+        >
           <p
             style={{
               margin: "1rem 0rem",
             }}
           >
-            {date}
+            {useDateFormat(date)}
           </p>
-          <p  dangerouslySetInnerHTML={{__html: body}} ></p>
+          <p dangerouslySetInnerHTML={{ __html: body }}></p>
         </div>
       </div>
     </div>

@@ -14,6 +14,7 @@ import "./email-card.css";
 import { IEmailDto } from "../../dto/emailsDTO";
 import { Avatar } from "../avatar/Avatar";
 import { useAppSelector } from "../../hooks/reduxHooks";
+import { useDateFormat } from "../../hooks/useDateFormat";
 
 interface IEmailCardProps {
   emailData: IEmailDto;
@@ -49,7 +50,7 @@ export const EmailCard = (props: IEmailCardProps) => {
         <div>
           <p className="truncate">{short_description}</p>
           <p>
-            <time dateTime={`${date}`}>May 15</time>
+            <time dateTime={`${date}`}>{useDateFormat(date)}</time>
             {favorite.includes(id) && (
               <small
                 style={{

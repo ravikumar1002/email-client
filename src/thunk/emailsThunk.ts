@@ -6,7 +6,6 @@ export const getAllEmailThunk = createAsyncThunk(
         try {
             const response = await fetch("https://flipkart-email-mock.now.sh/")
                 .then((response) => response.json())
-            console.log(response)
             return response
         } catch (error: any) {
             const errorCode = error.code;
@@ -23,7 +22,6 @@ export const getEmailThunk = createAsyncThunk(
         try {
             const response = await fetch(`https://flipkart-email-mock.now.sh/?id=${id}`)
                 .then((response) => response.json())
-            console.log(response)
             return response
         } catch (error: any) {
             const errorCode = error.code;

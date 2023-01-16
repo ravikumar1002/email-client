@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EmailCard } from "../components/email-card/EmailCard";
 import { EmailDetailsOpen } from "../components/emailDetailsOpen/EmailDetailsOpen";
 import { IEmailDto } from "../dto/emailsDTO";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
+import { useDateFormat } from "../hooks/useDateFormat";
 import { getEmailThunk } from "../thunk/emailsThunk";
 import "./email-page.css";
-import { addEmailInRead } from "./emailSlice";
+import { addEmailInRead, filterUnreadEmail } from "./emailSlice";
 
 export const EmailPage = () => {
   const { emails, filterEmails, emailData, emailSort } = useAppSelector(
@@ -25,6 +26,7 @@ export const EmailPage = () => {
   const closeEmailCardStyle = {
     width: "100%",
   };
+
   return (
     <div
       style={{
@@ -38,7 +40,7 @@ export const EmailPage = () => {
         style={openEmailDetails ? openEmailCardStyle : closeEmailCardStyle}
       >
         {filterEmails.length > 0 &&
-          filterEmails.map((email) => {
+          filterEmails.map((email, i) => {
             return (
               <div
                 key={email?.id}
@@ -49,10 +51,11 @@ export const EmailPage = () => {
                   }
                   setCurrentEmailData(email);
                   dispatch(getEmailThunk(email?.id));
-
+                  // dispatch(filterUnreadEmail());
                   setOpenEmailDetails(true);
                 }}
               >
+                {i}
                 <EmailCard emailData={email} />
               </div>
             );
