@@ -4,7 +4,7 @@ import { IEmailsDto } from "../dto/emailsDTO"
 import { getAllEmailThunk, getEmailThunk } from "../thunk/emailsThunk";
 
 interface IInitialState {
-    emails: {};
+    emails: [];
     totalEmails: number;
     emailData: {};
     emailsStatus: string;
