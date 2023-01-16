@@ -1,6 +1,14 @@
+import {
+  filterFavorite,
+  filterReadEmail,
+  filterUnreadEmail,
+} from "../../features/emailSlice";
+import { useAppDispatch } from "../../hooks/reduxHooks";
 import { PillButton } from "../button/PillButton";
 import "./filter.css";
 export const Filter = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <div className="filter__wrapper">
       <div>
@@ -15,6 +23,7 @@ export const Filter = () => {
         <PillButton
           handleClick={() => {
             console.log("click");
+            dispatch(filterUnreadEmail());
           }}
         >
           Unread
@@ -22,6 +31,7 @@ export const Filter = () => {
         <PillButton
           handleClick={() => {
             console.log("click");
+            dispatch(filterReadEmail());
           }}
         >
           read
@@ -29,6 +39,7 @@ export const Filter = () => {
         <PillButton
           handleClick={() => {
             console.log("click");
+            dispatch(filterFavorite());
           }}
         >
           Favorite

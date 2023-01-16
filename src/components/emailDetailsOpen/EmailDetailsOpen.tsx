@@ -37,7 +37,7 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
             justifyContent: "space-between",
           }}
         >
-          <h2>{short_description}</h2>
+          <h2>{subject}</h2>
           <PillButton
             handleClick={() => {
               console.log("mark as fav");
@@ -49,7 +49,9 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
             Mark as favorite
           </PillButton>
         </div>
-        <div>
+        <div style={{
+          paddingRight: "1rem"
+        }}>
           <p
             style={{
               margin: "1rem 0rem",
@@ -57,7 +59,7 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
           >
             {date}
           </p>
-          {body}
+          <p  dangerouslySetInnerHTML={{__html: body}} ></p>
         </div>
       </div>
     </div>

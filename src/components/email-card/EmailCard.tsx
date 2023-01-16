@@ -13,6 +13,7 @@ import "./email-card.css";
 
 import { IEmailDto } from "../../dto/emailsDTO";
 import { Avatar } from "../avatar/Avatar";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
 interface IEmailCardProps {
   emailData: IEmailDto;
@@ -26,6 +27,10 @@ export const EmailCard = (props: IEmailCardProps) => {
     short_description,
     subject,
   } = props.emailData;
+
+  const {
+    emailSort: { favorite },
+  } = useAppSelector((state) => state.emailsList);
 
   return (
     <section className="email-card__wrapper">
@@ -45,13 +50,15 @@ export const EmailCard = (props: IEmailCardProps) => {
           <p className="truncate">{short_description}</p>
           <p>
             <time dateTime={`${date}`}>May 15</time>
-            <small
-              style={{
-                color: "red",
-              }}
-            >
-              Favorite
-            </small>
+            {favorite.includes(id) && (
+              <small
+                style={{
+                  color: "red",
+                }}
+              >
+                Favorite
+              </small>
+            )}
           </p>
         </div>
       </div>

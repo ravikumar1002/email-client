@@ -9,7 +9,6 @@ interface IInitialState {
     totalEmails: number;
     emailSort: {
         read: string[];
-        unread: string[];
         favorite: string[];
     };
     emailData: {
@@ -25,7 +24,6 @@ const initialState: IInitialState = {
     filterEmails: [],
     emailSort: {
         read: [],
-        unread: [],
         favorite: [],
     },
     emailData: {},
@@ -43,7 +41,22 @@ export const emailSlice = createSlice({
         },
         addEmailInFavorite: (state, action: PayloadAction<string>) => {
             state.emailSort.favorite = [...state.emailSort.favorite, action.payload]
-        }
+        },
+        filterUnreadEmail: (state) => {
+            state.filterEmails = state.emails.filter((email) => {
+                return !state.emailSort.read.includes(email.id)
+            })
+        },
+        filterReadEmail: (state) => {
+            state.filterEmails = state.emails.filter((email) => {
+                return state.emailSort.read.includes(email.id)
+            })
+        },
+        filterFavorite: (state) => {
+            state.filterEmails = state.emails.filter((email) => {
+                return state.emailSort.favorite.includes(email.id)
+            })
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -72,7 +85,7 @@ export const emailSlice = createSlice({
     }
 })
 
-export const { addEmailInRead, addEmailInFavorite } = emailSlice.actions
+export const { addEmailInRead, addEmailInFavorite, filterUnreadEmail, filterReadEmail, filterFavorite } = emailSlice.actions
 
 export const emailReducer = emailSlice.reducer
 
