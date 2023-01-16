@@ -42,7 +42,7 @@ export const EmailCard = (props: IEmailCardProps) => {
           </p>
         </div>
         <div>
-          <p>{short_description}</p>
+          <p className="truncate">{short_description}</p>
           <p>
             <time dateTime={`${date}`}>May 15</time>
             <small
