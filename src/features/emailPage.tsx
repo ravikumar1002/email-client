@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { EmailCard } from "../components/email-card/EmailCard";
 import { EmailDetailsOpen } from "../components/emailDetailsOpen/EmailDetailsOpen";
+import { IEmailDto } from "../dto/emailsDTO";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
+import { getEmailThunk } from "../thunk/emailsThunk";
 import "./email-page.css";
 import { addEmailInRead } from "./emailSlice";
 
@@ -10,6 +12,8 @@ export const EmailPage = () => {
     (state) => state.emailsList
   );
   const [openEmailDetails, setOpenEmailDetails] = useState<boolean>(false);
+  const [currentOpenEmailData, setCurrentEmailData] = useState<IEmailDto>();
+
   const dispatch = useAppDispatch();
 
   const openEmailCardStyle = {
@@ -43,6 +47,9 @@ export const EmailPage = () => {
                   if (!emailSort.read.includes(email?.id)) {
                     dispatch(addEmailInRead(email?.id));
                   }
+                  setCurrentEmailData(email);
+                  dispatch(getEmailThunk(email?.id));
+
                   setOpenEmailDetails(true);
                 }}
               >
@@ -57,7 +64,7 @@ export const EmailPage = () => {
             width: "60%",
           }}
         >
-          <EmailDetailsOpen />
+          <EmailDetailsOpen emailDetails={currentOpenEmailData} />
         </div>
       )}
     </div>

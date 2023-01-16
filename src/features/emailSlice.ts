@@ -12,7 +12,10 @@ interface IInitialState {
         unread: string[];
         favorite: string[];
     };
-    emailData: {};
+    emailData: {
+        id: string;
+        body: string;
+    };
     emailsStatus: string;
     emailStatus: string;
 }
@@ -37,6 +40,9 @@ export const emailSlice = createSlice({
     reducers: {
         addEmailInRead: (state, action: PayloadAction<string>) => {
             state.emailSort.read = [...state.emailSort.read, action.payload]
+        },
+        addEmailInFavorite: (state, action: PayloadAction<string>) => {
+            state.emailSort.favorite = [...state.emailSort.favorite, action.payload]
         }
     },
     extraReducers: (builder) => {
@@ -66,7 +72,7 @@ export const emailSlice = createSlice({
     }
 })
 
-export const { addEmailInRead } = emailSlice.actions
+export const { addEmailInRead, addEmailInFavorite } = emailSlice.actions
 
 export const emailReducer = emailSlice.reducer
 
