@@ -29,8 +29,6 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
 
   const { id, body } = emailData;
 
-  useEffect(() => {}, []);
-
   return (
     <div className="email-details__open">
       <div>

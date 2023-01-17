@@ -13,7 +13,16 @@ export const EmailPage = () => {
     (state) => state.emailsList
   );
   const [openEmailDetails, setOpenEmailDetails] = useState<boolean>(false);
-  const [currentOpenEmailData, setCurrentEmailData] = useState<IEmailDto>();
+  const [currentOpenEmailData, setCurrentEmailData] = useState<IEmailDto>({
+    id: "",
+    from: {
+      email: "",
+      name: "",
+    },
+    date: 0,
+    subject: "",
+    short_description: "",
+  });
 
   const dispatch = useAppDispatch();
 
@@ -58,12 +67,14 @@ export const EmailPage = () => {
           })}
       </div>
       {openEmailDetails && (
-        <div style={{
-          width:" 60%",
-          height:" calc(100vh - 5rem)",
-          overflowY: "scroll",
-          padding: "1rem"
-        }}>
+        <div
+          style={{
+            width: " 60%",
+            height: " calc(100vh - 5rem)",
+            overflowY: "scroll",
+            padding: "1rem",
+          }}
+        >
           <EmailDetailsOpen emailDetails={currentOpenEmailData} />
         </div>
       )}

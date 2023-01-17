@@ -26,7 +26,10 @@ const initialState: IInitialState = {
         read: [],
         favorite: [],
     },
-    emailData: {},
+    emailData: {
+        id: "",
+        body: "",
+    },
     totalEmails: 0,
     emailsStatus: "idle",
     emailStatus: "idle",
