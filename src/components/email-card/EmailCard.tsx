@@ -55,6 +55,7 @@ export const EmailCard = (props: IEmailCardProps) => {
               <small
                 style={{
                   color: "red",
+                  marginLeft: "1rem",
                 }}
               >
                 Favorite

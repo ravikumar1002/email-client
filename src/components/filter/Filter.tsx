@@ -4,12 +4,13 @@ import {
   filterReadEmail,
   filterUnreadEmail,
 } from "../../features/emailSlice";
-import { useAppDispatch } from "../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { Button } from "../button/Button";
 import "./filter.css";
 
 export const Filter = () => {
   const dispatch = useAppDispatch();
+  const { activeFilter } = useAppSelector((state) => state.appData);
 
   return (
     <div className="filter__wrapper">
@@ -23,6 +24,7 @@ export const Filter = () => {
         }}
       >
         <Button
+          variant={activeFilter === "Unread" ? "contained" : "outlined"}
           handleClick={() => {
             dispatch(saveFilterType("Unread"));
             dispatch(filterUnreadEmail());
@@ -31,6 +33,7 @@ export const Filter = () => {
           Unread
         </Button>
         <Button
+          variant={activeFilter === "read" ? "contained" : "outlined"}
           handleClick={() => {
             dispatch(saveFilterType("read"));
             dispatch(filterReadEmail());
@@ -39,6 +42,7 @@ export const Filter = () => {
           read
         </Button>
         <Button
+          variant={activeFilter === "Favorite" ? "contained" : "outlined"}
           handleClick={() => {
             dispatch(saveFilterType("Favorite"));
             dispatch(filterFavorite());
