@@ -1,6 +1,17 @@
-import { PillButton } from "../button/PillButton";
+import { saveFilterType } from "../../features/appSlice";
+import {
+  filterFavorite,
+  filterReadEmail,
+  filterUnreadEmail,
+} from "../../features/emailSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { Button } from "../button/Button";
 import "./filter.css";
+
 export const Filter = () => {
+  const dispatch = useAppDispatch();
+  const { activeFilter } = useAppSelector((state) => state.appData);
+
   return (
     <div className="filter__wrapper">
       <div>
@@ -12,27 +23,33 @@ export const Filter = () => {
           gap: "0.5rem",
         }}
       >
-        <PillButton
+        <Button
+          variant={activeFilter === "Unread" ? "contained" : "outlined"}
           handleClick={() => {
-            console.log("click");
+            dispatch(saveFilterType("Unread"));
+            dispatch(filterUnreadEmail());
           }}
         >
           Unread
-        </PillButton>
-        <PillButton
+        </Button>
+        <Button
+          variant={activeFilter === "read" ? "contained" : "outlined"}
           handleClick={() => {
-            console.log("click");
+            dispatch(saveFilterType("read"));
+            dispatch(filterReadEmail());
           }}
         >
           read
-        </PillButton>
-        <PillButton
+        </Button>
+        <Button
+          variant={activeFilter === "Favorite" ? "contained" : "outlined"}
           handleClick={() => {
-            console.log("click");
+            dispatch(saveFilterType("Favorite"));
+            dispatch(filterFavorite());
           }}
         >
           Favorite
-        </PillButton>
+        </Button>
       </div>
     </div>
   );

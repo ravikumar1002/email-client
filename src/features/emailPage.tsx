@@ -1,22 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EmailCard } from "../components/email-card/EmailCard";
 import { EmailDetailsOpen } from "../components/emailDetailsOpen/EmailDetailsOpen";
-import { useAppSelector } from "../hooks/reduxHooks";
+import { IEmailDto } from "../dto/emailsDTO";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
+import { useDateFormat } from "../hooks/useDateFormat";
+import { getEmailThunk } from "../thunk/emailsThunk";
 import "./email-page.css";
+import { addEmailInRead, filterUnreadEmail } from "./emailSlice";
 
 export const EmailPage = () => {
-  const { emails, emailData } = useAppSelector((state) => state.emailsList);
+  const { emails, filterEmails, emailData, emailSort } = useAppSelector(
+    (state) => state.emailsList
+  );
   const [openEmailDetails, setOpenEmailDetails] = useState<boolean>(false);
+  const [currentOpenEmailData, setCurrentEmailData] = useState<IEmailDto>({
+    id: "",
+    from: {
+      email: "",
+      name: "",
+    },
+    date: 0,
+    subject: "",
+    short_description: "",
+  });
+
+  const dispatch = useAppDispatch();
 
   const openEmailCardStyle = {
     width: "40%",
-    height: "100vh",
-    overflow: "auto",
   };
 
   const closeEmailCardStyle = {
     width: "100%",
   };
+
   return (
     <div
       style={{
@@ -29,12 +46,18 @@ export const EmailPage = () => {
         className="emails-container"
         style={openEmailDetails ? openEmailCardStyle : closeEmailCardStyle}
       >
-        {emails.length > 0 &&
-          emails.map((email) => {
+        {filterEmails.length > 0 &&
+          filterEmails.map((email) => {
             return (
               <div
                 key={email?.id}
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (!emailSort.read.includes(email?.id)) {
+                    dispatch(addEmailInRead(email?.id));
+                  }
+                  setCurrentEmailData(email);
+                  dispatch(getEmailThunk(email?.id));
                   setOpenEmailDetails(true);
                 }}
               >
@@ -46,10 +69,13 @@ export const EmailPage = () => {
       {openEmailDetails && (
         <div
           style={{
-            width: "60%",
+            width: " 60%",
+            height: " calc(100vh - 5rem)",
+            overflowY: "scroll",
+            padding: "1rem",
           }}
         >
-          <EmailDetailsOpen />
+          <EmailDetailsOpen emailDetails={currentOpenEmailData} />
         </div>
       )}
     </div>
