@@ -82,6 +82,7 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
           style={{
             paddingRight: "1rem",
             lineHeight: "1.5rem",
+            paddingBottom: "1rem",
           }}
         >
           <p

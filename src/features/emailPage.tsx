@@ -19,8 +19,6 @@ export const EmailPage = () => {
 
   const openEmailCardStyle = {
     width: "40%",
-    height: "100vh",
-    overflow: "auto",
   };
 
   const closeEmailCardStyle = {
@@ -40,7 +38,7 @@ export const EmailPage = () => {
         style={openEmailDetails ? openEmailCardStyle : closeEmailCardStyle}
       >
         {filterEmails.length > 0 &&
-          filterEmails.map((email, i) => {
+          filterEmails.map((email) => {
             return (
               <div
                 key={email?.id}
@@ -51,22 +49,21 @@ export const EmailPage = () => {
                   }
                   setCurrentEmailData(email);
                   dispatch(getEmailThunk(email?.id));
-                  // dispatch(filterUnreadEmail());
                   setOpenEmailDetails(true);
                 }}
               >
-                {i}
                 <EmailCard emailData={email} />
               </div>
             );
           })}
       </div>
       {openEmailDetails && (
-        <div
-          style={{
-            width: "60%",
-          }}
-        >
+        <div style={{
+          width:" 60%",
+          height:" calc(100vh - 5rem)",
+          overflowY: "scroll",
+          padding: "1rem"
+        }}>
           <EmailDetailsOpen emailDetails={currentOpenEmailData} />
         </div>
       )}
