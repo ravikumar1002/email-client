@@ -9,3 +9,8 @@
 .email-details__open > div {
   padding: 0.5rem;
 }
+
+
+.email-details__content p {
+  margin: 0.5rem 0;
+}

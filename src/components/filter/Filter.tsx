@@ -4,7 +4,7 @@ import {
   filterUnreadEmail,
 } from "../../features/emailSlice";
 import { useAppDispatch } from "../../hooks/reduxHooks";
-import { PillButton } from "../button/PillButton";
+import { Button } from "../button/Button";
 import "./filter.css";
 export const Filter = () => {
   const dispatch = useAppDispatch();
@@ -20,27 +20,27 @@ export const Filter = () => {
           gap: "0.5rem",
         }}
       >
-        <PillButton
+        <Button
           handleClick={() => {
             dispatch(filterUnreadEmail());
           }}
         >
           Unread
-        </PillButton>
-        <PillButton
+        </Button>
+        <Button
           handleClick={() => {
             dispatch(filterReadEmail());
           }}
         >
           read
-        </PillButton>
-        <PillButton
+        </Button>
+        <Button
           handleClick={() => {
             dispatch(filterFavorite());
           }}
         >
           Favorite
-        </PillButton>
+        </Button>
       </div>
     </div>
   );

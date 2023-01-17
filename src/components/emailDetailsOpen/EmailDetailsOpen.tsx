@@ -4,7 +4,7 @@ import { addEmailInFavorite, filterFavorite } from "../../features/emailSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { useDateFormat } from "../../hooks/useDateFormat";
 import { Avatar } from "../avatar/Avatar";
-import { PillButton } from "../button/PillButton";
+import { Button } from "../button/Button";
 import "./email-details_open.css";
 
 interface IEmailDetailsOpenProps {
@@ -42,7 +42,7 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
           }}
         >
           <h2>{subject}</h2>
-          <PillButton
+          <Button
             handleClick={() => {
               if (!emailSort.favorite.includes(id)) {
                 dispatch(addEmailInFavorite(id));
@@ -51,11 +51,12 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
             }}
           >
             Mark as favorite
-          </PillButton>
+          </Button>
         </div>
         <div
           style={{
             paddingRight: "1rem",
+            lineHeight: "1.5rem",
           }}
         >
           <p
@@ -65,7 +66,7 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
           >
             {useDateFormat(date)}
           </p>
-          <p dangerouslySetInnerHTML={{ __html: body }}></p>
+          <p dangerouslySetInnerHTML={{ __html: body }} className = "email-details__content"></p>
         </div>
       </div>
     </div>
