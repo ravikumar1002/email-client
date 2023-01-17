@@ -11,7 +11,18 @@ interface IButtonProps
 }
 
 export const Button = (props: IButtonProps) => {
-  const { variant = "outlined", color = "primary", ...restProps } = props;
+  const {
+    variant = "outlined",
+    color = "primary",
+    handleClick,
+    ...restProps
+  } = props;
 
-  return <button className={`base ${variant} ${color}`} {...restProps} />;
+  return (
+    <button
+      className={`base ${variant} ${color}`}
+      {...restProps}
+      onClick={handleClick}
+    />
+  );
 };

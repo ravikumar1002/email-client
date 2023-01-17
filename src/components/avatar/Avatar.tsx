@@ -9,7 +9,7 @@ export const Avatar = (props: IAvatarProps) => {
 
   return (
     <span className="avatar-wrapper">
-      <span>{avatarText[0].toUpperCase()}</span>
+      <span style={{ color: "white" }}>{avatarText[0].toUpperCase()}</span>
     </span>
   );
 };

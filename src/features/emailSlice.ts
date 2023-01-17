@@ -57,6 +57,10 @@ export const emailSlice = createSlice({
                 return state.emailSort.favorite.includes(email.id)
             })
         },
+        removeFromFavorite: (state, action: PayloadAction<string>) => {
+            const favoriteArr = state.emailSort.favorite.filter((id) => id === action.payload ? false : true)
+            state.emailSort.favorite = favoriteArr
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -85,7 +89,7 @@ export const emailSlice = createSlice({
     }
 })
 
-export const { addEmailInRead, addEmailInFavorite, filterUnreadEmail, filterReadEmail, filterFavorite } = emailSlice.actions
+export const { addEmailInRead, addEmailInFavorite, filterUnreadEmail, filterReadEmail, filterFavorite, removeFromFavorite } = emailSlice.actions
 
 export const emailReducer = emailSlice.reducer
 

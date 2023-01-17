@@ -2,7 +2,6 @@
   display: inline-flex;
   font-size: var(--avatar-medium);
   background-color: var(--accent);
-  color: white;
   font-weight: 500;
   border-radius: 50px;
   height: 3rem;

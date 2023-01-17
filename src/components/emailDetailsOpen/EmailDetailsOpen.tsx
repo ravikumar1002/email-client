@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { IEmailDto } from "../../dto/emailsDTO";
-import { addEmailInFavorite, filterFavorite } from "../../features/emailSlice";
+import {
+  addEmailInFavorite,
+  filterFavorite,
+  removeFromFavorite,
+} from "../../features/emailSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { useDateFormat } from "../../hooks/useDateFormat";
 import { Avatar } from "../avatar/Avatar";
@@ -13,6 +17,8 @@ interface IEmailDetailsOpenProps {
 
 export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
   const { emailSort, emailData } = useAppSelector((state) => state.emailsList);
+  const { activeFilter } = useAppSelector((state) => state.appData);
+
   const dispatch = useAppDispatch();
   const {
     date,
@@ -42,16 +48,35 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
           }}
         >
           <h2>{subject}</h2>
-          <Button
-            handleClick={() => {
-              if (!emailSort.favorite.includes(id)) {
-                dispatch(addEmailInFavorite(id));
-                // dispatch(filterFavorite());
-              }
-            }}
-          >
-            Mark as favorite
-          </Button>
+          {emailSort.favorite.includes(id) ? (
+            <Button
+              variant="contained"
+              handleClick={() => {
+                if (activeFilter === "Favorite") {
+                  dispatch(removeFromFavorite(id));
+                  dispatch(filterFavorite());
+                } else {
+                  dispatch(removeFromFavorite(id));
+                }
+              }}
+            >
+              Remove favorite
+            </Button>
+          ) : (
+            <Button
+              variant="outlined"
+              handleClick={() => {
+                if (activeFilter === "Favorite") {
+                  dispatch(addEmailInFavorite(id));
+                  dispatch(filterFavorite());
+                } else {
+                  dispatch(addEmailInFavorite(id));
+                }
+              }}
+            >
+              Mark as favorite
+            </Button>
+          )}
         </div>
         <div
           style={{
@@ -66,7 +91,10 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
           >
             {useDateFormat(date)}
           </p>
-          <p dangerouslySetInnerHTML={{ __html: body }} className = "email-details__content"></p>
+          <p
+            dangerouslySetInnerHTML={{ __html: body }}
+            className="email-details__content"
+          ></p>
         </div>
       </div>
     </div>
