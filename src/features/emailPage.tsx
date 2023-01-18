@@ -43,7 +43,8 @@ export const EmailPage = () => {
       }}
     >
       <div
-        className="emails-container"
+        className="emails-container scrollbar"
+        id="scrollbar-style"
         style={openEmailDetails ? openEmailCardStyle : closeEmailCardStyle}
       >
         {filterEmails.length > 0 &&
@@ -71,9 +72,10 @@ export const EmailPage = () => {
           style={{
             width: " 60%",
             height: " calc(100vh - 5rem)",
-            overflowY: "scroll",
             padding: "1rem",
           }}
+          className="scrollbar"
+          id="scrollbar-style"
         >
           <EmailDetailsOpen emailDetails={currentOpenEmailData} />
         </div>
