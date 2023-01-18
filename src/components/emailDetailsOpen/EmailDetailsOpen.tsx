@@ -49,6 +49,7 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
           {emailSort.favorite.includes(id) ? (
             <Button
               variant="contained"
+              color="secondary"
               handleClick={() => {
                 if (activeFilter === "Favorite") {
                   dispatch(removeFromFavorite(id));
