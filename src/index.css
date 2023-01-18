@@ -3,7 +3,7 @@
 :root {
   --text-color: #636363;
   --bg-color: #f4f5f9;
-  --bg-read: #f2f2f2;
+  --bg-read: #ffffff;
   --accent: #e54065;
   --border-color: #cfd2dc;
   --bg-button: #e1e4ea;
@@ -17,5 +17,4 @@
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
   color: var(--text-color);
-  
 }

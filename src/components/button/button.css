@@ -1,26 +1,27 @@
-
 .base {
-  border-radius: 4px;
+  border-radius: 50px;
   border: 1px solid transparent;
-  padding: 4px 8px;
+  padding: 0.5rem 1rem;
   cursor: pointer;
+  font-weight: 500;
   background-color: transparent;
 }
 
 .base.contained.primary {
-  background-color: red;
-  color: white;
-  border-color: red;
+  background-color: var(--bg-button);
+  border-color: var(--bg-button);
+  color: black;
 }
 
 .base.contained.secondary {
-  background-color: green;
+  background-color: var(--accent);
   color: white;
-  border-color: green;
+  border-color: var(--accent);
 }
 
 .base.outlined.primary {
-  background-color: white;
-  color: red;
-  border-color: red;
+  background-color: inherit;
+  color: var(--text-color);
+  border-color: transparent;
 }
+

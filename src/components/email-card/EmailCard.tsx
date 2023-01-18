@@ -31,10 +31,19 @@ export const EmailCard = (props: IEmailCardProps) => {
 
   const {
     emailSort: { favorite },
+    emailData,
   } = useAppSelector((state) => state.emailsList);
 
   return (
-    <section className="email-card__wrapper">
+    <section
+      className="email-card__wrapper"
+      style={{
+        border:
+          emailData.id === id
+            ? "1px solid Var(--accent)"
+            : "1px solid var(--border-color)",
+      }}
+    >
       <div>
         <Avatar avatarText={name} />
       </div>
