@@ -3,6 +3,7 @@
   padding: 1rem;
   border: 2px solid var(--border-color);
   border-radius: 10px;
+  background-color: var(--bg-read);
 }
 
 .email-details__open > div {

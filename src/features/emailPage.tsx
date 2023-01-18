@@ -61,6 +61,12 @@ export const EmailPage = () => {
                   dispatch(getEmailThunk(email?.id));
                   setOpenEmailDetails(true);
                 }}
+                style={{
+                  background: emailSort?.read.includes(email?.id)
+                    ? "var(--bg-read)"
+                    : "var(--bg-color)",
+                  borderRadius: "10px",
+                }}
               >
                 <EmailCard emailData={email} />
               </div>
