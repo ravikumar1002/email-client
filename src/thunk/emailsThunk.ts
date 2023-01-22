@@ -1,10 +1,11 @@
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { GETEMAILS } from "../constants";
 
 export const getAllEmailThunk = createAsyncThunk(
     "/email/getAllEmail", async (_, { rejectWithValue }) => {
         try {
-            const response = await fetch("https://flipkart-email-mock.now.sh/")
+            const response = await fetch(GETEMAILS)
                 .then((response) => response.json())
             return response
         } catch (error: any) {

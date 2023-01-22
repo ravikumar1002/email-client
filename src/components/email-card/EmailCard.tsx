@@ -63,7 +63,7 @@ export const EmailCard = (props: IEmailCardProps) => {
             {favorite.includes(id) && (
               <small
                 style={{
-                  color: "red",
+                  color: "var(--accent)",
                   marginLeft: "1rem",
                 }}
               >

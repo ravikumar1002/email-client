@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { FAVORITE } from "../../constants";
 import { IEmailDto } from "../../dto/emailsDTO";
 import {
   addEmailInFavorite,
@@ -51,7 +52,7 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
               variant="contained"
               color="secondary"
               handleClick={() => {
-                if (activeFilter === "Favorite") {
+                if (activeFilter === FAVORITE) {
                   dispatch(removeFromFavorite(id));
                   dispatch(filterFavorite());
                 } else {
@@ -65,7 +66,7 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
             <Button
               variant="outlined"
               handleClick={() => {
-                if (activeFilter === "Favorite") {
+                if (activeFilter === FAVORITE) {
                   dispatch(addEmailInFavorite(id));
                   dispatch(filterFavorite());
                 } else {
