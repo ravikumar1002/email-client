@@ -34,6 +34,9 @@ export const EmailCard = (props: IEmailCardProps) => {
     emailData,
   } = useAppSelector((state) => state.emailsList);
 
+
+  console.log(emailData.id, id, emailData, favorite)
+
   return (
     <section
       className="email-card__wrapper"
