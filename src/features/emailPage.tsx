@@ -63,7 +63,6 @@ export const EmailPage = () => {
 
                   ///
                   if (email?.id == emailData.id) {
-                    console.log("open body");
                     setOpenEmailDetails(false);
                     dispatch(closeDetailEmail());
                   } else {

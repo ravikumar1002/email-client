@@ -1,6 +1,7 @@
-import { FAVORITE, READ, UNREAD } from "../../constants";
+import { ALL, FAVORITE, READ, UNREAD } from "../../constants";
 import { saveFilterType } from "../../features/appSlice";
 import {
+  allEmails,
   filterFavorite,
   filterReadEmail,
   filterUnreadEmail,
@@ -24,6 +25,16 @@ export const Filter = () => {
           gap: "0.5rem",
         }}
       >
+        <Button
+          variant={activeFilter === ALL ? "contained" : "outlined"}
+          handleClick={() => {
+            dispatch(saveFilterType(ALL));
+            dispatch(allEmails());
+          }}
+        >
+          {ALL}
+        </Button>
+
         <Button
           variant={activeFilter === UNREAD ? "contained" : "outlined"}
           handleClick={() => {
