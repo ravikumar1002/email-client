@@ -44,6 +44,7 @@ export const emailSlice = createSlice({
         },
         addEmailInFavorite: (state, action: PayloadAction<string>) => {
             state.emailSort.favorite = [...state.emailSort.favorite, action.payload]
+            localStorage.setItem("favorite", JSON.stringify(state.emailSort.favorite))
         },
         filterUnreadEmail: (state) => {
             state.filterEmails = state.emails.filter((email) => {
@@ -66,8 +67,12 @@ export const emailSlice = createSlice({
         removeFromFavorite: (state, action: PayloadAction<string>) => {
             const favoriteArr = state.emailSort.favorite.filter((id) => id === action.payload ? false : true)
             state.emailSort.favorite = favoriteArr
+            localStorage.setItem("favorite", JSON.stringify(state.emailSort.favorite))
         },
-
+        saveLocalStorageData: (state, action: PayloadAction<{ read: string[], favorite: string[] }>) => {
+            state.emailSort.read = action.payload.read ? action.payload.read : []
+            state.emailSort.favorite = action.payload.favorite ?action.payload.favorite   :  []
+        },
         closeDetailEmail: (state) => {
             state.emailData.id = ""
             state.emailData.body = ""
@@ -100,7 +105,7 @@ export const emailSlice = createSlice({
     }
 })
 
-export const { addEmailInRead, addEmailInFavorite, filterUnreadEmail, filterReadEmail, filterFavorite, removeFromFavorite, closeDetailEmail , allEmails} = emailSlice.actions
+export const { addEmailInRead, addEmailInFavorite, filterUnreadEmail, filterReadEmail, filterFavorite, removeFromFavorite, closeDetailEmail, saveLocalStorageData, allEmails } = emailSlice.actions
 
 export const emailReducer = emailSlice.reducer
 

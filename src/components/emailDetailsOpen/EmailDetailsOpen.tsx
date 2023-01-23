@@ -49,7 +49,7 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
           }}
         >
           <h2>{subject}</h2>
-          {emailSort.favorite.includes(id) ? (
+          {emailSort.favorite && emailSort.favorite.includes(id) ? (
             <Button
               variant="contained"
               color="secondary"
@@ -100,7 +100,9 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
               className="email-details__content"
             ></p>
           ) : (
-            <p>Loading...</p>
+            <div className="spinner-box">
+              <div className="three-quarter-spinner"></div>
+            </div>
           )}
         </div>
       </div>

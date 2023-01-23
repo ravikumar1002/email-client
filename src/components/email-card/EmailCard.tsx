@@ -60,7 +60,7 @@ export const EmailCard = (props: IEmailCardProps) => {
           <p className="truncate">{short_description}</p>
           <p>
             <time dateTime={`${date}`}>{useDateFormat(date)}</time>
-            {favorite.includes(id) && (
+            {favorite && favorite.includes(id) && (
               <small
                 style={{
                   color: "var(--accent)",

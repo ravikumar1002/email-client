@@ -59,19 +59,24 @@ export const EmailPage = () => {
                   e.preventDefault();
                   if (!emailSort.read.includes(email?.id)) {
                     dispatch(addEmailInRead(email?.id));
+                    const storageData = localStorage?.getItem("read")
+                      ? // @ts-ignore
+                        JSON.parse(localStorage?.getItem("read"))
+                      : "";
+                    const readLocalStorage = [...storageData, email?.id];
+                    localStorage.setItem(
+                      "read",
+                      JSON.stringify(readLocalStorage)
+                    );
                   }
-
-                  ///
                   if (email?.id == emailData.id) {
                     setOpenEmailDetails(false);
                     dispatch(closeDetailEmail());
                   } else {
                     setCurrentEmailData(email);
                     dispatch(getEmailThunk(email?.id));
-
                     setOpenEmailDetails(true);
                   }
-                  ///
                 }}
                 style={{
                   background: emailSort?.read.includes(email?.id)

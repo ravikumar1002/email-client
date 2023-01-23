@@ -4,6 +4,7 @@
   border: 2px solid var(--border-color);
   border-radius: 10px;
   background-color: var(--bg-read);
+  min-height: calc(100vh - 7rem);
 }
 
 .email-details__open > div {
