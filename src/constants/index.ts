@@ -9,4 +9,4 @@ export const ALL = "All"
 
 // API
 
-export const GETEMAILS = "https://flipkart-email-mock.now.sh/"
+export const BASEURL = "https://flipkart-email-mock.now.sh/"

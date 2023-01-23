@@ -12,7 +12,7 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getAllEmailThunk());
+    dispatch(getAllEmailThunk(1));
     dispatch(saveFilterType(ALL));
 
     const getreadEmailFromLocalStorage = JSON.parse(
@@ -23,7 +23,6 @@ function App() {
       //@ts-ignore
       localStorage.getItem("favorite")
     );
-    console.log(getreadEmailFromLocalStorage, getFavoriteFromLocalStorage);
     dispatch(
       saveLocalStorageData({
         read: getreadEmailFromLocalStorage,
