@@ -38,10 +38,9 @@ export const EmailPage = () => {
   };
 
   return (
-    <div
+    <main
       style={{
         display: "flex",
-        gap: "2rem",
         width: "100%",
       }}
     >
@@ -105,6 +104,6 @@ export const EmailPage = () => {
           <EmailDetailsOpen emailDetails={currentOpenEmailData} />
         </div>
       )}
-    </div>
+    </main>
   );
 };

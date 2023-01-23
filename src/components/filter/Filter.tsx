@@ -15,7 +15,7 @@ export const Filter = () => {
   const { activeFilter } = useAppSelector((state) => state.appData);
 
   return (
-    <div className="filter__wrapper">
+    <header className="filter__wrapper">
       <div>
         <p>Filter By: </p>
       </div>
@@ -63,6 +63,6 @@ export const Filter = () => {
           {FAVORITE}
         </Button>
       </div>
-    </div>
+    </header>
   );
 };

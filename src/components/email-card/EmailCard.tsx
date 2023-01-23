@@ -1,13 +1,3 @@
-// interface IEmailData {
-//   date: number;
-//   from: {
-//     email: string;
-//     name: string;
-//   };
-//   id: string;
-//   short_description: string;
-//   subject: string;
-// }
 
 import "./email-card.css";
 
@@ -40,8 +30,8 @@ export const EmailCard = (props: IEmailCardProps) => {
       style={{
         border:
           emailData.id === id
-            ? "1px solid Var(--accent)"
-            : "1px solid var(--border-color)",
+            ? "2px solid Var(--accent)"
+            : "2px solid var(--border-color)",
       }}
     >
       <div>

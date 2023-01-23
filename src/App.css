@@ -23,6 +23,7 @@
 
 .App {
   background-color: var(--bg-color);
+  font-size: 15px;
 }
 
 @keyframes spin {
