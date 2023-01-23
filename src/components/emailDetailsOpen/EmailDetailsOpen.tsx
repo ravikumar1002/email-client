@@ -17,7 +17,9 @@ interface IEmailDetailsOpenProps {
 }
 
 export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
-  const { emailSort, emailData } = useAppSelector((state) => state.emailsList);
+  const { emailSort, emailData, emailStatus } = useAppSelector(
+    (state) => state.emailsList
+  );
   const { activeFilter } = useAppSelector((state) => state.appData);
 
   const dispatch = useAppDispatch();
@@ -92,10 +94,14 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
           >
             {useDateFormat(date)}
           </p>
-          <p
-            dangerouslySetInnerHTML={{ __html: body }}
-            className="email-details__content"
-          ></p>
+          {emailStatus !== "pending" ? (
+            <p
+              dangerouslySetInnerHTML={{ __html: body }}
+              className="email-details__content"
+            ></p>
+          ) : (
+            <p>Loading...</p>
+          )}
         </div>
       </div>
     </div>
