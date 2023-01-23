@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { FAVORITE } from "../../constants";
 import { IEmailDto } from "../../dto/emailsDTO";
 import {
   addEmailInFavorite,
@@ -16,7 +17,9 @@ interface IEmailDetailsOpenProps {
 }
 
 export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
-  const { emailSort, emailData } = useAppSelector((state) => state.emailsList);
+  const { emailSort, emailData, emailStatus } = useAppSelector(
+    (state) => state.emailsList
+  );
   const { activeFilter } = useAppSelector((state) => state.appData);
 
   const dispatch = useAppDispatch();
@@ -46,12 +49,12 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
           }}
         >
           <h2>{subject}</h2>
-          {emailSort.favorite.includes(id) ? (
+          {emailSort.favorite && emailSort.favorite.includes(id) ? (
             <Button
               variant="contained"
               color="secondary"
               handleClick={() => {
-                if (activeFilter === "Favorite") {
+                if (activeFilter === FAVORITE) {
                   dispatch(removeFromFavorite(id));
                   dispatch(filterFavorite());
                 } else {
@@ -65,7 +68,7 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
             <Button
               variant="outlined"
               handleClick={() => {
-                if (activeFilter === "Favorite") {
+                if (activeFilter === FAVORITE) {
                   dispatch(addEmailInFavorite(id));
                   dispatch(filterFavorite());
                 } else {
@@ -91,10 +94,16 @@ export const EmailDetailsOpen = (props: IEmailDetailsOpenProps) => {
           >
             {useDateFormat(date)}
           </p>
-          <p
-            dangerouslySetInnerHTML={{ __html: body }}
-            className="email-details__content"
-          ></p>
+          {emailStatus !== "pending" ? (
+            <p
+              dangerouslySetInnerHTML={{ __html: body }}
+              className="email-details__content"
+            ></p>
+          ) : (
+            <div className="spinner-box">
+              <div className="three-quarter-spinner"></div>
+            </div>
+          )}
         </div>
       </div>
     </div>

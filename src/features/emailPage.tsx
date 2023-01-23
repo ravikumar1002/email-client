@@ -3,12 +3,17 @@ import { EmailCard } from "../components/email-card/EmailCard";
 import { EmailDetailsOpen } from "../components/emailDetailsOpen/EmailDetailsOpen";
 import { IEmailDto } from "../dto/emailsDTO";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import { useDateFormat } from "../hooks/useDateFormat";
 import { getEmailThunk } from "../thunk/emailsThunk";
 import "./email-page.css";
-import { addEmailInRead, filterUnreadEmail } from "./emailSlice";
+import {
+  addEmailInRead,
+  closeDetailEmail,
+  filterUnreadEmail,
+} from "./emailSlice";
 
 export const EmailPage = () => {
+  const dispatch = useAppDispatch();
+
   const { emails, filterEmails, emailData, emailSort } = useAppSelector(
     (state) => state.emailsList
   );
@@ -24,8 +29,6 @@ export const EmailPage = () => {
     short_description: "",
   });
 
-  const dispatch = useAppDispatch();
-
   const openEmailCardStyle = {
     width: "40%",
   };
@@ -35,10 +38,9 @@ export const EmailPage = () => {
   };
 
   return (
-    <div
+    <main
       style={{
         display: "flex",
-        gap: "2rem",
         width: "100%",
       }}
     >
@@ -56,16 +58,31 @@ export const EmailPage = () => {
                   e.preventDefault();
                   if (!emailSort.read.includes(email?.id)) {
                     dispatch(addEmailInRead(email?.id));
+                    const storageData = localStorage?.getItem("read")
+                      ? // @ts-ignore
+                        JSON.parse(localStorage?.getItem("read"))
+                      : "";
+                    const readLocalStorage = [...storageData, email?.id];
+                    localStorage.setItem(
+                      "read",
+                      JSON.stringify(readLocalStorage)
+                    );
                   }
-                  setCurrentEmailData(email);
-                  dispatch(getEmailThunk(email?.id));
-                  setOpenEmailDetails(true);
+                  if (email?.id == emailData.id) {
+                    setOpenEmailDetails(false);
+                    dispatch(closeDetailEmail());
+                  } else {
+                    setCurrentEmailData(email);
+                    dispatch(getEmailThunk(email?.id));
+                    setOpenEmailDetails(true);
+                  }
                 }}
                 style={{
                   background: emailSort?.read.includes(email?.id)
                     ? "var(--bg-read)"
                     : "var(--bg-color)",
                   borderRadius: "10px",
+                  cursor: "auto",
                 }}
               >
                 <EmailCard emailData={email} />
@@ -73,6 +90,7 @@ export const EmailPage = () => {
             );
           })}
       </div>
+
       {openEmailDetails && (
         <div
           style={{
@@ -86,6 +104,6 @@ export const EmailPage = () => {
           <EmailDetailsOpen emailDetails={currentOpenEmailData} />
         </div>
       )}
-    </div>
+    </main>
   );
 };

@@ -1,5 +1,7 @@
+import { ALL, FAVORITE, READ, UNREAD } from "../../constants";
 import { saveFilterType } from "../../features/appSlice";
 import {
+  allEmails,
   filterFavorite,
   filterReadEmail,
   filterUnreadEmail,
@@ -13,7 +15,7 @@ export const Filter = () => {
   const { activeFilter } = useAppSelector((state) => state.appData);
 
   return (
-    <div className="filter__wrapper">
+    <header className="filter__wrapper">
       <div>
         <p>Filter By: </p>
       </div>
@@ -24,33 +26,43 @@ export const Filter = () => {
         }}
       >
         <Button
-          variant={activeFilter === "Unread" ? "contained" : "outlined"}
+          variant={activeFilter === ALL ? "contained" : "outlined"}
           handleClick={() => {
-            dispatch(saveFilterType("Unread"));
+            dispatch(saveFilterType(ALL));
+            dispatch(allEmails());
+          }}
+        >
+          {ALL}
+        </Button>
+
+        <Button
+          variant={activeFilter === UNREAD ? "contained" : "outlined"}
+          handleClick={() => {
+            dispatch(saveFilterType(UNREAD));
             dispatch(filterUnreadEmail());
           }}
         >
-          Unread
+          {UNREAD}
         </Button>
         <Button
-          variant={activeFilter === "read" ? "contained" : "outlined"}
+          variant={activeFilter === READ ? "contained" : "outlined"}
           handleClick={() => {
-            dispatch(saveFilterType("read"));
+            dispatch(saveFilterType(READ));
             dispatch(filterReadEmail());
           }}
         >
-          read
+          {READ}
         </Button>
         <Button
-          variant={activeFilter === "Favorite" ? "contained" : "outlined"}
+          variant={activeFilter === FAVORITE ? "contained" : "outlined"}
           handleClick={() => {
-            dispatch(saveFilterType("Favorite"));
+            dispatch(saveFilterType(FAVORITE));
             dispatch(filterFavorite());
           }}
         >
-          Favorite
+          {FAVORITE}
         </Button>
       </div>
-    </div>
+    </header>
   );
 };
