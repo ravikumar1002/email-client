@@ -1,15 +1,9 @@
-import emailInstance from './axiosInstance/emailInstance';
+import { BASEURL } from "../constants";
 
 
-// export const GetEmailDataAsJSON = async<TResult = unknown>(
-//     url: string,
-//     config: AxiosRequestConfig = {}
-// ): Promise<TResult> => {
-//     const response = await emailInstance.get<TResult>(url, {
-//         ...config,
-//         headers: {
-//             'Content-Type': 'application/json',
-//             ...config.headers,
-//         },
-//     });
-//     return response.data;
+const getDataAsJSON = async (url: string, params: Record<string, string> = {}) => {
+    const requestURL = new URL(`${BASEURL}${url}`);
+    Object.keys(params).forEach((param) => requestURL.searchParams.append(param, params[param]));
+    const result = await fetch(requestURL, { method: 'GET', headers: {} });
+    return result.json();
+};
