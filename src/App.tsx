@@ -12,7 +12,7 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getAllEmailThunk(1));
+    dispatch(getAllEmailThunk());
     dispatch(saveFilterType(ALL));
 
     const getreadEmailFromLocalStorage = JSON.parse(

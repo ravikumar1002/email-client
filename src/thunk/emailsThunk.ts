@@ -4,9 +4,9 @@ import { IEmailDto, IEmailsDto } from "../dto/emailsDTO";
 import { getDataAsJSON } from "../service/GetAsJson";
 
 export const getAllEmailThunk = createAsyncThunk(
-    "/email/getAllEmail", async (pageNo: number, { rejectWithValue }) => {
+    "/email/getAllEmail", async (_, { rejectWithValue }) => {
         try {
-            const response = await getDataAsJSON(`?page=${pageNo}`)
+            const response = await getDataAsJSON(``)
             return response
         } catch (error: any) {
             const errorCode = error.code;

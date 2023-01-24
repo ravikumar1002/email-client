@@ -14,9 +14,8 @@ import {
 export const EmailPage = () => {
   const dispatch = useAppDispatch();
 
-  const { emails, filterEmails, emailData, emailSort } = useAppSelector(
-    (state) => state.emailsList
-  );
+  const { emails, filterEmails, emailData, emailSort, emailsStatus } =
+    useAppSelector((state) => state.emailsList);
   const [openEmailDetails, setOpenEmailDetails] = useState<boolean>(false);
   const [currentOpenEmailData, setCurrentEmailData] = useState<IEmailDto>({
     id: "",
@@ -49,6 +48,12 @@ export const EmailPage = () => {
         id="scrollbar-style"
         style={openEmailDetails ? openEmailCardStyle : closeEmailCardStyle}
       >
+        {emailsStatus === "pending" && (
+          <div className="spinner-box">
+            <div className="three-quarter-spinner"></div>
+          </div>
+        )}
+
         {filterEmails.length > 0 &&
           filterEmails.map((email) => {
             return (
