@@ -8,7 +8,7 @@ import { saveLocalStorageData } from "./features/emailSlice";
 import { useAppDispatch } from "./hooks/reduxHooks";
 import { getAllEmailThunk } from "./thunk/emailsThunk";
 
-function App() {
+const App = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -37,6 +37,6 @@ function App() {
       <EmailPage />
     </div>
   );
-}
+};
 
 export default App;
