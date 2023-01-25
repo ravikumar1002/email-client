@@ -8,11 +8,11 @@ import { saveLocalStorageData } from "./features/emailSlice";
 import { useAppDispatch } from "./hooks/reduxHooks";
 import { getAllEmailThunk } from "./thunk/emailsThunk";
 
-function App() {
+const App = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getAllEmailThunk(1));
+    dispatch(getAllEmailThunk());
     dispatch(saveFilterType(ALL));
 
     const getreadEmailFromLocalStorage = JSON.parse(
@@ -37,6 +37,6 @@ function App() {
       <EmailPage />
     </div>
   );
-}
+};
 
 export default App;
