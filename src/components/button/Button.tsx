@@ -5,14 +5,14 @@ interface IButtonProps
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   > {
-  variant?: "contained" | "outlined";
+  variant?: "contained" | "outlined" | "transparent";
   color?: "primary" | "secondary";
   handleClick: () => void;
 }
 
 export const Button = (props: IButtonProps) => {
   const {
-    variant = "outlined",
+    variant = "transparent",
     color = "primary",
     handleClick,
     ...restProps

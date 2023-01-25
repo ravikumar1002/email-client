@@ -13,6 +13,13 @@
   color: black;
 }
 
+
+.base.transparent.primary {
+  background-color: transparent;
+  border-color: transparent;
+  color: black;
+}
+
 .base.contained.secondary {
   background-color: var(--accent);
   color: white;
@@ -21,6 +28,6 @@
 
 .base.outlined.primary {
   background-color: inherit;
-  color: var(--text-color);
-  border-color: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
 }

@@ -26,7 +26,7 @@ export const Filter = () => {
         }}
       >
         <Button
-          variant={activeFilter === ALL ? "contained" : "outlined"}
+          variant={activeFilter === ALL ? "contained" : "transparent"}
           handleClick={() => {
             dispatch(saveFilterType(ALL));
             dispatch(allEmails());
@@ -36,7 +36,7 @@ export const Filter = () => {
         </Button>
 
         <Button
-          variant={activeFilter === UNREAD ? "contained" : "outlined"}
+          variant={activeFilter === UNREAD ? "contained" : "transparent"}
           handleClick={() => {
             dispatch(saveFilterType(UNREAD));
             dispatch(filterUnreadEmail());
@@ -45,7 +45,7 @@ export const Filter = () => {
           {UNREAD}
         </Button>
         <Button
-          variant={activeFilter === READ ? "contained" : "outlined"}
+          variant={activeFilter === READ ? "contained" : "transparent"}
           handleClick={() => {
             dispatch(saveFilterType(READ));
             dispatch(filterReadEmail());
@@ -54,7 +54,7 @@ export const Filter = () => {
           {READ}
         </Button>
         <Button
-          variant={activeFilter === FAVORITE ? "contained" : "outlined"}
+          variant={activeFilter === FAVORITE ? "contained" : "transparent"}
           handleClick={() => {
             dispatch(saveFilterType(FAVORITE));
             dispatch(filterFavorite());
