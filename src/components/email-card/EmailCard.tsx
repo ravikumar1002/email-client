@@ -1,4 +1,3 @@
-
 import "./email-card.css";
 
 import { IEmailDto } from "../../dto/emailsDTO";
@@ -40,10 +39,10 @@ export const EmailCard = (props: IEmailCardProps) => {
       <div className="email-card__content">
         <div>
           <p>
-            From: <strong>{`${name} ${email}`}</strong>
+            From: <strong>{`${name} <${email}>`}</strong>
           </p>
           <p>
-            Subject <strong>{`${subject}`}</strong>
+            Subject: <strong>{`${subject}`}</strong>
           </p>
         </div>
         <div>
