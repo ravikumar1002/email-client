@@ -54,6 +54,7 @@ export const EmailCard = (props: IEmailCardProps) => {
                 style={{
                   color: "var(--accent)",
                   marginLeft: "1rem",
+                  fontWeight: "bold"
                 }}
               >
                 Favorite
